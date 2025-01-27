@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - EyeAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-gradient: linear-gradient(135deg, #f6f8fa 0%, #e9ecef 100%);
+            --success-color: #00b894;
+            --danger-color: #d63031;
+        }
+        
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .main-container {
+            padding: 80px 0;
+        }
+
+        .result-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .result-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .image-container {
+            margin: 20px auto 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .uploaded-image {
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .uploaded-image:hover {
+            transform: scale(1.02);
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-indicator {
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .result-indicator.tumorous {
+            background: #ffe9e9;
+            color: var(--danger-color);
+        }
+
+        .result-indicator.healthy {
+            background: #e9ffe9;
+            color: var(--success-color);
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .tumorous .result-icon {
+            color: var(--danger-color);
+        }
+
+        .healthy .result-icon {
+            color: var(--success-color);
+        }
+
+        .btn-back {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            color: white;
+        }
+
+        footer {
+            background: white;
+            padding: 20px 0;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 -2px 15px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-eye me-2"></i>EyeAI
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="result-container">
+                <h1 class="result-title">Analysis Result</h1>
+                
+                <div class="image-container">
+                    <img src="data:image/jpeg;base64,{{ image }}" alt="Analyzed Eye Image" class="uploaded-image">
+                </div>
+
+                <div class="result-box">
+                    <div class="result-indicator {% if result == 'Tumorous' %}tumorous{% else %}healthy{% endif %}">
+                        <i class="fas {% if result == 'Tumorous' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %} result-icon"></i>
+                        <div>{{ result }}</div>
+                    </div>
+                </div>
+
+                <a href="/" class="btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>Analyze Another Image
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="mb-0"> 2025 EyeAI - Iris Tumor Detection System</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
